@@ -37,6 +37,7 @@ def handle_message(msg: dict, node_id: str) -> dict:
     """
 
     payload = msg.get("payload", {}) or {}
+    request_id = payload.get("request_id")
 
     try:
         request = AgentRequest(
@@ -53,6 +54,7 @@ def handle_message(msg: dict, node_id: str) -> dict:
             "payload": {
                 "success": False,
                 "node_id": node_id,
+                "request_id": request_id,
                 "error": str(exc),
             }
         }
@@ -72,6 +74,7 @@ def handle_message(msg: dict, node_id: str) -> dict:
     final_state = graph.invoke(state)
     response = final_state.get("response", {})
     response["node_id"] = node_id
+    response["request_id"] = request_id
 
     return {"payload": response}
 
