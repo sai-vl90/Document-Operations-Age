@@ -1,5 +1,6 @@
-langgraph
-langchain
+langgraph==1.2.11
+langchain-core==1.6.0
+langsmith==0.11.1
 pydantic>=2.0
 pandas
 numpy
